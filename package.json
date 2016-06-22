@@ -1,25 +1,26 @@
 {
-  "name": "cordova-plugin-touch-id",
-  "version": "3.2.0",
-  "description": "Scan the fingerprint of your user with the TouchID sensor (iPhone 5S, iPhone 6(S), ..)",
+  "name": "cordova-plugin-fingerprint-id",
+  "version": "0.1.0",
+  "description": "\r\n    Scan the fingerprint of your user with the TouchID sensor and other Fingerprint sensor\r\n  ",
   "cordova": {
-    "id": "cordova-plugin-touch-id",
+    "id": "cordova-plugin-fingerprint-id",
     "platforms": [
-      "ios"
+      "ios",
+      "android"
     ]
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/EddyVerbruggen/cordova-plugin-touch-id.git"
+    "url": "git+https://github.com/susannegeorge/cordova-plugin-fingerprint-id.git"
   },
   "keywords": [
     "TouchID",
     "Touch ID",
     "Fingerprint",
     "Biometric",
-    "Scanner",
     "ecosystem:cordova",
-    "cordova-ios"
+    "cordova-ios",
+    "cordova-android"
   ],
   "engines": [
     {
@@ -27,10 +28,10 @@
       "version": ">=3.0.0"
     }
   ],
-  "author": "Eddy Verbruggen <eddyverbruggen@gmail.com> (https://github.com/EddyVerbruggen)",
+  "author": "susanne",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/EddyVerbruggen/cordova-plugin-touch-id/issues"
+    "url": "https://github.com/susannegeorge/cordova-plugin-fingerprint-id/issues"
   },
-  "homepage": "https://github.com/EddyVerbruggen/cordova-plugin-touch-id#readme"
+  "homepage": "https://github.com/susannegeorge/cordova-plugin-fingerprint-id#readme"
 }

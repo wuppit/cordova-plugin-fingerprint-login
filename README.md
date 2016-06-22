@@ -1,71 +1,53 @@
-# Cordova TouchID Plugin
-by [Eddy Verbruggen](http://twitter.com/eddyverbruggen)
+# Cordova FingerPrint Plugin
+by susanne
 
-## 0. Index
+This is a fork of Cordova TouchID Plugin by Eddy Verbruggen
+The original plugin is located here: https://github.com/EddyVerbruggen/cordova-plugin-touch-id
 
+//TODO
+Add in support for Samsung Devices (Samsung Pass)
+
+
+## Index
 1. [Description](#1-description)
-2. [Screenshot](#2-screenshot)
-3. [Installation](#3-installation)
-	3. [Automatically (CLI / Plugman)](#automatically-cli--plugman)
-	3. [Manually](#manually)
-4. [Usage](#4-usage)
-5. [Security++](#5-security)
-6. [License](#5-license)
+2. [Installation](#2-installation)
+	2. [Automatically (CLI / Plugman)](#automatically-cli--plugman)
+3. [Usage](#3-usage)
+4. [Security++](#4-security)
+5. [License](#5-license)
 
 ## 1. Description
 
-Scan the fingerprint of your user with the TouchID sensor (iPhone 5S).
+Scan the fingerprint of your user with the TouchID sensor (iPhone 5S) and Samsung Android Phones.
 
 * Compatible with [Cordova Plugman](https://github.com/apache/cordova-plugman).
 * Minimum iOS version is 8 (error callbacks will be gracefully invoked on lower versions).
 * Requires a fingerprint scanner, so an iPhone 5S or newer is required.
 
-## 2. Screenshot
-Distorted a bit because I created it back when Apple had not yet released the SDK and they're not a fan of developers posting screenshots of unreleased features.
+//TODO - Samsung Android Description
 
-![ScreenShot](screenshots/TouchID-demo.PNG)
-
-## 3. Installation
+## 2. Installation
 
 ### Automatically (CLI / Plugman)
 Compatible with [Cordova Plugman](https://github.com/apache/cordova-plugman), compatible with [PhoneGap 3.0 CLI](http://docs.phonegap.com/en/3.0.0/guide_cli_index.md.html#The%20Command-line%20Interface_add_features), here's how it works with the CLI (backup your project first!):
 
 From npm:
 ```
-$ cordova plugin add cordova-plugin-touch-id
+$ cordova plugin add cordova-plugin-fingerprint-id
 $ cordova prepare
 ```
 
 The latest, from the master repo:
 ```
-$ cordova plugin add https://github.com/EddyVerbruggen/cordova-plugin-touch-id
+$ cordova plugin add <>
 $ cordova prepare
 ```
 
 TouchID.js is brought in automatically. There is no need to change or add anything in your html.
 
-### Manually
+//TODO - Samsung Android Installation
 
-1\. Add the following xml to your `config.xml` in the root directory of your `www` folder:
-```xml
-<feature name="TouchID">
-  <param name="ios-package" value="TouchID" />
-</feature>
-```
-
-You'll need to add the `LocalAuthentication.framework` and `Security.framework` to your project.
-Click your project, Build Phases, Link Binary With Libraries, search for and add the frameworks.
-
-2\. Grab a copy of TouchID.js, add it to your project and reference it in `index.html`:
-```html
-<script type="text/javascript" src="js/TouchID.js"></script>
-```
-
-3\. Download the source files and copy them to your project.
-
-iOS: Copy the two `.h` and two `.m` files to `platforms/ios/<ProjectName>/Plugins`
-
-## 4. Usage
+## 3. Usage
 First you'll want to check whether or not the user has a configured fingerprint scanner.
 You can use this to show a 'log in with your fingerprint' button next to a username/password login form.
 ```js
@@ -114,7 +96,9 @@ You can copy-paste these lines of code for a quick test:
 <button onclick="window.plugins.touchid.verifyFingerprint('Scan your fingerprint please', function(msg) {alert('ok: ' + msg)}, function(msg) {alert('not ok: ' + JSON.stringify(msg))})">Scan fingerprint</button>
 ```
 
-## 5. Security++
+//TODO - Samsung Android Usage
+
+## 4. Security++
 Since iOS9 it's possible to check whether or not the list of enrolled fingerprints changed since
 the last time you checked it. It's recommended you add this check so you can counter hacker attacks
 to your app. See [this article](https://godpraksis.no/2016/03/fingerprint-trojan/) for more details.
@@ -144,7 +128,9 @@ window.plugins.touchid.isAvailable(
 );
 ```
 
-## 6. License
+//TODO - Samsung Android Security
+
+## 5. License
 
 [The MIT License (MIT)](http://www.opensource.org/licenses/mit-license.html)
 
