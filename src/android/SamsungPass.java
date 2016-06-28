@@ -11,7 +11,7 @@ import org.json.JSONException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import android.util.Log;
-
+import android.util.SparseArray;
 import com.samsung.android.sdk.SsdkUnsupportedException;
 import com.samsung.android.sdk.pass.Spass;
 import com.samsung.android.sdk.pass.SpassFingerprint;
@@ -71,7 +71,11 @@ public class SamsungPass extends CordovaPlugin {
 			hasRegisteredFingers(args, callbackContext);
 		}
 		else if ("startIdentify".equals(action)){
+            startIdentify(args, callbackContext);
 		}
+        else if ("getFingerprintName".equals(action)){
+            getFingerprintName(args, callbackContext);
+        }
 		else{
             return false;
         }
@@ -99,8 +103,78 @@ public class SamsungPass extends CordovaPlugin {
             callbackContext.error("Error: No fingerprints are registered");
         }
     }
+
+    private void getFingerprintName(JSONArray args, CallbackContext callbackContext) {
+        Log.i(TAG, "Method: getFingerprintName");
+        String fingerprints = "";
+        SparseArray<String> mList = null;
+        Log.i("=Fingerprint Name=");
+        if (mSpassFingerprint != null) {
+            mList = mSpassFingerprint.getRegisteredFingerprintName();
+        }
+        if (mList == null) {
+            Log.e("Registered fingerprint is not existed.");
+            callbackContext.error("Registered fingerprint is not existed.");
+        } else {
+            for (int i = 0; i < mList.size(); i++) {
+                int index = mList.keyAt(i);
+                String name = mList.get(index);
+                fingerprints = "Index: " + index " Name: " + name + ",";
+            }
+            callbackContext.success(fingerprints);
+        }
+        
+    }
 	
 	private void startIdentify(JSONArray args, CallbackContext callbackContext) {
-		//TODO
+        Log.i(TAG, "Method: startIdentify");
+        private SpassFingerprint.IdentifyListener mIdentifyListenerDialog = new SpassFingerprint.IdentifyListener() {
+        @Override
+        public void onFinished(int eventStatus) {
+            Log.i("identify finished : reason =" + getEventStatusName(eventStatus));
+            int FingerprintIndex = 0;
+            try {
+                FingerprintIndex = mSpassFingerprint.getIdentifiedFingerprintIndex();
+            } catch (IllegalStateException ise) {
+                log(ise.getMessage());
+            }
+            if (eventStatus == SpassFingerprint.STATUS_AUTHENTIFICATION_SUCCESS) {
+                Log.i("onFinished() : Identify authentification Success with FingerprintIndex : " + FingerprintIndex);
+                callbackContext.success();
+            } else if (eventStatus == SpassFingerprint.STATUS_AUTHENTIFICATION_PASSWORD_SUCCESS) {
+                Log.i("onFinished() : Password authentification Success");
+                callbackContext.success();
+            } else if (eventStatus == SpassFingerprint.STATUS_USER_CANCELLED
+                    || eventStatus == SpassFingerprint.STATUS_USER_CANCELLED_BY_TOUCH_OUTSIDE) {
+                Log.i("onFinished() : User cancel this identify.");
+                callbackContext.error("cancel");
+            } else if (eventStatus == SpassFingerprint.STATUS_TIMEOUT_FAILED) {
+                Log.i("onFinished() : The time for identify is finished.");
+                callbackContext.error("timeout");
+            } else {
+                Log.e("onFinished() : Authentification Fail for identify");
+                callbackContext.error("failed");
+            }
+        }
+
+        @Override
+        public void onReady() {
+            Log.i("identify state is ready");
+        }
+
+        @Override
+        public void onStarted() {
+            Log.i("User touched fingerprint sensor");
+        }
+
+        @Override
+        public void onCompleted() {
+            Log.i("the identify is completed");
+        }
+    };
+
+    mSpassFingerprint.startIdentifyWithDialog(mContext, mIdentifyListenerDialog, false)
+
+
 	}
 }

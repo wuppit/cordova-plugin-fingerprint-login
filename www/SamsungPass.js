@@ -1,15 +1,19 @@
 function SamsungPass() {
 }
 
-TouchID.prototype.isAvailable = function (successCallback, errorCallback) {
+SamsungPass.prototype.isAvailable = function (successCallback, errorCallback) {
   cordova.exec(successCallback, errorCallback, "SamsungPass", "isSamsungPassSupported", []);
 };
 
-TouchID.prototype.didFingerprintDatabaseChange = function (successCallback, errorCallback) {
+SamsungPass.prototype.hasRegisteredFingers = function (successCallback, errorCallback) {
   cordova.exec(successCallback, errorCallback, "SamsungPass", "hasRegisteredFingers", []);
 };
 
-TouchID.prototype.verifyFingerprint = function (successCallback, errorCallback) {
+SamsungPass.prototype.getFingerprintName = function (successCallback, errorCallback) {
+  cordova.exec(successCallback, errorCallback, "SamsungPass", "getFingerprintName", []);
+};
+
+SamsungPass.prototype.startIdentify = function (successCallback, errorCallback) {
   cordova.exec(successCallback, errorCallback, "SamsungPass", "startIdentify", []);
 };
 
