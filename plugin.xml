@@ -9,14 +9,14 @@
     Scan the fingerprint of your user with the TouchID sensor and other Fingerprint sensor
   </description>
 
-  <author></author>
+  <author>yurish</author>
 
   <license>MIT</license>
 
   <keywords>TouchID, Touch ID, Fingerprint, Biometric</keywords>
 
   <engines>
-    <engine name="cordova" version=">=3.0.0"/>
+    <engine name="cordova" version=">=5.0.0"/>
   </engines>
 
   <js-module src="www/TouchID.js" name="TouchID">

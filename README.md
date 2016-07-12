@@ -1,5 +1,5 @@
 # Cordova FingerPrint Plugin
-by susanne
+by yurish
 
 This is a fork of Cordova TouchID Plugin by Eddy Verbruggen and Cordova Fingerprint ID Plugin by susanne
 The original plugins are located here: https://github.com/EddyVerbruggen/cordova-plugin-touch-id and https://github.com/susannegeorge/cordova-plugin-fingerprint-id

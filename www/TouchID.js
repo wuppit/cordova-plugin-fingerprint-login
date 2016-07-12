@@ -1,5 +1,4 @@
 cordova.define("window.plugins.touchid", function(require, exports, module){
-  alert("initializing fingerprint");
   var exec = require("cordova/exec");
 
   function TouchID() {
@@ -39,4 +38,3 @@ cordova.define("window.plugins.touchid", function(require, exports, module){
   //cordova.addConstructor(TouchID.install);
 
 });
-alert("defining fingerprint");
