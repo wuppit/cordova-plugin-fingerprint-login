@@ -1,9 +1,9 @@
 {
-  "name": "cordova-plugin-fingerprint-id",
-  "version": "0.3.0",
+  "name": "cordova-plugin-fingerprint-login",
+  "version": "0.3.1",
   "description": "\r\n    Scan the fingerprint of your user with the TouchID sensor and other Fingerprint sensor\r\n  ",
   "cordova": {
-    "id": "cordova-plugin-fingerprint-id",
+    "id": "cordova-plugin-fingerprint-login",
     "platforms": [
       "ios",
       "android"
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/susannegeorge/cordova-plugin-fingerprint-id.git"
+    "url": "git+https://github.com/yurish/cordova-plugin-fingerprint-login.git"
   },
   "keywords": [
     "TouchID",
@@ -28,10 +28,10 @@
       "version": ">=3.0.0"
     }
   ],
-  "author": "susanne",
+  "author": "yurish",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/susannegeorge/cordova-plugin-fingerprint-id/issues"
+    "url": "https://github.com/yurish/cordova-plugin-fingerprint-login/issues"
   },
-  "homepage": "https://github.com/susannegeorge/cordova-plugin-fingerprint-id#readme"
+  "homepage": "https://github.com/yurish/cordova-plugin-fingerprint-login#readme"
 }

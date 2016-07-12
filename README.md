@@ -1,8 +1,8 @@
 # Cordova FingerPrint Plugin
 by susanne
 
-This is a fork of Cordova TouchID Plugin by Eddy Verbruggen
-The original plugin is located here: https://github.com/EddyVerbruggen/cordova-plugin-touch-id
+This is a fork of Cordova TouchID Plugin by Eddy Verbruggen and Cordova Fingerprint ID Plugin by susanne
+The original plugins are located here: https://github.com/EddyVerbruggen/cordova-plugin-touch-id and https://github.com/susannegeorge/cordova-plugin-fingerprint-id
 
 //TODO
 Add in support for Samsung Devices (Samsung Pass)
@@ -33,7 +33,7 @@ Compatible with [Cordova Plugman](https://github.com/apache/cordova-plugman), co
 
 From npm:
 ```
-$ cordova plugin add cordova-plugin-fingerprint-id
+$ cordova plugin add cordova-plugin-fingerprint-login
 $ cordova prepare
 ```
 
