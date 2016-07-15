@@ -23,4 +23,4 @@ cordova.define("window.plugins.samsungpass", function(require, exports, module) 
 
     var samsungPass = new SamsungPass();
     module.exports = samsungPass;
-}
+});
