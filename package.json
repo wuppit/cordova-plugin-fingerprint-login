@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-fingerprint-login",
-  "version": "0.3.1",
+  "version": "0.3.3",
   "description": "\r\n    Scan the fingerprint of your user with the TouchID sensor and other Fingerprint sensor\r\n  ",
   "cordova": {
     "id": "cordova-plugin-fingerprint-login",
