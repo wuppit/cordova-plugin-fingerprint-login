@@ -56,7 +56,7 @@ public class SamsungPass extends CordovaPlugin {
             return;
         }
 		
-		isFeatureEnabled_index = sSpass.isFeatureEnabled(Spass.DEVICE_FINGERPRINT_FINGER_INDEX);
+	isFeatureEnabled_index = sSpass.isFeatureEnabled(Spass.DEVICE_FINGERPRINT_FINGER_INDEX);
         isFeatureEnabled_custom = sSpass.isFeatureEnabled(Spass.DEVICE_FINGERPRINT_CUSTOMIZED_DIALOG);
         isFeatureEnabled_uniqueId = sSpass.isFeatureEnabled(Spass.DEVICE_FINGERPRINT_UNIQUE_ID);
         isFeatureEnabled_backupPw = sSpass.isFeatureEnabled(Spass.DEVICE_FINGERPRINT_AVAILABLE_PASSWORD);
@@ -64,19 +64,19 @@ public class SamsungPass extends CordovaPlugin {
 	
     @Override
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
-		if ("isSamsungPassSupported".equals(action)) {
+	if ("isSamsungPassSupported".equals(action)) {
             isSamsungPassSupported(args, callbackContext);
         }
-		else if ("hasRegisteredFingers".equals(action)){
+	else if ("hasRegisteredFingers".equals(action)){
 			hasRegisteredFingers(args, callbackContext);
-		}
-		else if ("startIdentify".equals(action)){
+	}
+	else if ("startIdentify".equals(action)){
             startIdentify(args, callbackContext);
-		}
+	}
         else if ("getFingerprintName".equals(action)){
             getFingerprintName(args, callbackContext);
         }
-		else{
+	else{
             return false;
         }
         return true;
@@ -95,7 +95,7 @@ public class SamsungPass extends CordovaPlugin {
 	private void hasRegisteredFingers(JSONArray args, CallbackContext callbackContext) {
         Log.i(TAG, "Method: hasRegisteredFingers");
 		
-		hasRegisteredFinger = mSpassFingerprint.hasRegisteredFinger();
+	hasRegisteredFinger = mSpassFingerprint.hasRegisteredFinger();
 		
         if (hasRegisteredFinger) {
             callbackContext.success();
@@ -127,7 +127,8 @@ public class SamsungPass extends CordovaPlugin {
     }
 	
 	private void startIdentify(JSONArray args, CallbackContext callbackContext) {
-        Log.i(TAG, "Method: startIdentify");
+        	Log.i(TAG, "Method: startIdentify");
+	}
         private SpassFingerprint.IdentifyListener mIdentifyListenerDialog = new SpassFingerprint.IdentifyListener() {
         @Override
         public void onFinished(int eventStatus) {
