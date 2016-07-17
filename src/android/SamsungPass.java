@@ -1,4 +1,4 @@
-package com.susanne.fingerprint.SamsungPass;
+package com.cordova.plugin;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaArgs;
@@ -10,172 +10,111 @@ import org.apache.cordova.PluginResult;
 import org.json.JSONException;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import android.util.Log;
-import android.util.SparseArray;
+
 import com.samsung.android.sdk.SsdkUnsupportedException;
 import com.samsung.android.sdk.pass.Spass;
 import com.samsung.android.sdk.pass.SpassFingerprint;
 import com.samsung.android.sdk.pass.SpassInvalidStateException;
 
+public class SamsungPassPlugin extends CordovaPlugin {
 
-public class SamsungPass extends CordovaPlugin {
-	
-	private SpassFingerprint mSpassFingerprint;
-    	private Spass mSpass;
-	private boolean isFeatureEnabled_fingerprint = false;
-	private boolean hasRegisteredFinger = false;
-	private Context mContext;
-	private final String TAG = "SamsungPass Cordova";
-	
-	public SamsungPass() {
-	}
-	
-	
-	@Override
-    public void initialize(CordovaInterface cordova, CordovaWebView webView) {
-        super.initialize(cordova, webView);
-		mContext = this.cordova.getActivity().getApplicationContext();
-		sSpass = new Spass();
+    private Spass mSpass;
+    private SpassFingerprint mSpassFingerprint;
+    private boolean isFeatureEnabled = false;
+    private static final String TAG = "SamsungPassPlugin";
+
+    @Override
+    public void initialize(final CordovaInterface cordova, CordovaWebView webView) {
+
+        mSpass = new Spass();
 
         try {
-            sSpass.initialize(mContext);
-        } catch (SsdkUnsupportedException e) {
-            Log.e(TAG, "Exception: " + e);
-        } catch (UnsupportedOperationException e) {
-            Log.e(TAG, "Fingerprint Service is not supported in the device");
-        }
-		
-		isFeatureEnabled_fingerprint = sSpass.isFeatureEnabled(Spass.DEVICE_FINGERPRINT);
+            mSpass.initialize(this.cordova.getActivity().getApplicationContext());
+            Log.d(TAG, "Spass was Initialized");
 
-        if (isFeatureEnabled_fingerprint) {
-            mSpassFingerprint = new SpassFingerprint(mContext);
-            Log.i(TAG, "Fingerprint Service is supported in the device.");
-            Log.i(TAG, "SDK version : " + sSpass.getVersionName());
-        } else {
-            Log.e(TAG, "Fingerprint Service is not supported in the device.");
-            return;
+            isFeatureEnabled = mSpass.isFeatureEnabled(Spass.DEVICE_FINGERPRINT);
+
+            if (isFeatureEnabled) {
+                mSpassFingerprint = new SpassFingerprint(this.cordova.getActivity().getApplicationContext());
+                Log.d(TAG, "mSpassFingerprint was Initialized");
+            } else {
+                Log.d(TAG, "Fingerprint Service is not supported in the device.");
+            }
+        } catch (SsdkUnsupportedException e) {
+            Log.d(TAG, "Spass could not initialize" + e);
         }
-		
-	isFeatureEnabled_index = sSpass.isFeatureEnabled(Spass.DEVICE_FINGERPRINT_FINGER_INDEX);
-        isFeatureEnabled_custom = sSpass.isFeatureEnabled(Spass.DEVICE_FINGERPRINT_CUSTOMIZED_DIALOG);
-        isFeatureEnabled_uniqueId = sSpass.isFeatureEnabled(Spass.DEVICE_FINGERPRINT_UNIQUE_ID);
-        isFeatureEnabled_backupPw = sSpass.isFeatureEnabled(Spass.DEVICE_FINGERPRINT_AVAILABLE_PASSWORD);
+
     }
-	
-    @Override
-    public boolean execute(String action, JSONArray data, CallbackContext callbackContext) throws JSONException {
-	if ("isSamsungPassSupported".equals(action)) {
-            isSamsungPassSupported(args, callbackContext);
+
+    public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+        
+        Log.d(TAG, "Plugin Method Called: " + action);
+
+        if (action.equals("checkSamsungPassSupport")) {
+            this.checkSamsungPassSupport(args, callbackContext);
+        } else if (action.equals("checkForRegisteredFingers")) {
+            this.checkForRegisteredFingers(args, callbackContext);
+        } else if (action.equals("startIdentifyWithDialog")) {
+            this.startIdentifyWithDialog(args, callbackContext);
         }
-	else if ("hasRegisteredFingers".equals(action)){
-			hasRegisteredFingers(args, callbackContext);
-	}
-	else if ("startIdentify".equals(action)){
-            startIdentify(args, callbackContext);
-	}
-        else if ("getFingerprintName".equals(action)){
-            getFingerprintName(args, callbackContext);
-        }
-	else{
+        else {
             return false;
         }
+
         return true;
     }
-	
-	private void isSamsungPassSupported(JSONArray args, CallbackContext callbackContext) {
-        Log.i(TAG, "Method: isSamsungPassSupported");
 
-        if (isFeatureEnabled_fingerprint) {
+    private void checkSamsungPassSupport(JSONArray args, CallbackContext callbackContext) {
+        Log.d(TAG, "checkSamsungPassSupport");
+
+        if (isFeatureEnabled) {
             callbackContext.success();
         } else {
-            callbackContext.error("Error: Feature not enable");
-        }
-    }
-	
-	private void hasRegisteredFingers(JSONArray args, CallbackContext callbackContext) {
-        Log.i(TAG, "Method: hasRegisteredFingers");
-		
-	hasRegisteredFinger = mSpassFingerprint.hasRegisteredFinger();
-		
-        if (hasRegisteredFinger) {
-            callbackContext.success();
-        } else {
-            callbackContext.error("Error: No fingerprints are registered");
+            callbackContext.error("Error");
         }
     }
 
-    private void getFingerprintName(JSONArray args, CallbackContext callbackContext) {
-        Log.i(TAG, "Method: getFingerprintName");
-        String fingerprints = "";
-        SparseArray<String> mList = null;
-        Log.i("=Fingerprint Name=");
-        if (mSpassFingerprint != null) {
-            mList = mSpassFingerprint.getRegisteredFingerprintName();
-        }
-        if (mList == null) {
-            Log.e("Registered fingerprint is not existed.");
-            callbackContext.error("Registered fingerprint is not existed.");
+    private void checkForRegisteredFingers(JSONArray args, CallbackContext callbackContext) {
+        Log.d(TAG, "checkForRegisteredFingers");
+
+        boolean mHasRegisteredFinger = mSpassFingerprint.hasRegisteredFinger();
+
+        if (mHasRegisteredFinger) {
+            callbackContext.success();
         } else {
-            for (int i = 0; i < mList.size(); i++) {
-                int index = mList.keyAt(i);
-                String name = mList.get(index);
-                fingerprints = "Index: " + index + " Name: " + name + ",";
-            }
-            callbackContext.success(fingerprints);
+            callbackContext.error("Error");
         }
+    }
+
+    private void startIdentifyWithDialog(JSONArray args, CallbackContext callbackContext) {
+
+        final CallbackContext callbackContextFinal = callbackContext; 
         
+        SpassFingerprint.IdentifyListener listener = new SpassFingerprint.IdentifyListener() {
+            @Override
+            public void onFinished(int eventStatus) {
+                Log.d(TAG, "identify finished : reason=" + eventStatus);
+
+                if (eventStatus == SpassFingerprint.STATUS_AUTHENTIFICATION_SUCCESS) {
+                     Log.d(TAG, "onFinished() : Identify authentification Success");
+                     callbackContextFinal.success();
+                } else if (eventStatus == SpassFingerprint.STATUS_AUTHENTIFICATION_PASSWORD_SUCCESS) {
+                     callbackContextFinal.success();
+                } else {
+                     Log.d(TAG, "onFinished() : Authentification Fail for identify");
+                     callbackContextFinal.error("Error");
+                }
+            }
+            @Override
+            public void onReady() {}
+            @Override
+            public void onStarted() {}
+        };
+
+        mSpassFingerprint.setDialogTitle("Authentificate yourself!", 0xff0000);
+
+        mSpassFingerprint.startIdentifyWithDialog(this.cordova.getActivity().getApplicationContext(), listener, false);
     }
-	
-	private void startIdentify(JSONArray args, CallbackContext callbackContext) {
-        	Log.i(TAG, "Method: startIdentify");
-	}
-        private SpassFingerprint.IdentifyListener mIdentifyListenerDialog = new SpassFingerprint.IdentifyListener() {
-        @Override
-        public void onFinished(int eventStatus) {
-            Log.i("identify finished : reason =" + getEventStatusName(eventStatus));
-            int FingerprintIndex = 0;
-            try {
-                FingerprintIndex = mSpassFingerprint.getIdentifiedFingerprintIndex();
-            } catch (IllegalStateException ise) {
-                log(ise.getMessage());
-            }
-            if (eventStatus == SpassFingerprint.STATUS_AUTHENTIFICATION_SUCCESS) {
-                Log.i("onFinished() : Identify authentification Success with FingerprintIndex : " + FingerprintIndex);
-                callbackContext.success();
-            } else if (eventStatus == SpassFingerprint.STATUS_AUTHENTIFICATION_PASSWORD_SUCCESS) {
-                Log.i("onFinished() : Password authentification Success");
-                callbackContext.success();
-            } else if (eventStatus == SpassFingerprint.STATUS_USER_CANCELLED
-                    || eventStatus == SpassFingerprint.STATUS_USER_CANCELLED_BY_TOUCH_OUTSIDE) {
-                Log.i("onFinished() : User cancel this identify.");
-                callbackContext.error("cancel");
-            } else if (eventStatus == SpassFingerprint.STATUS_TIMEOUT_FAILED) {
-                Log.i("onFinished() : The time for identify is finished.");
-                callbackContext.error("timeout");
-            } else {
-                Log.e("onFinished() : Authentification Fail for identify");
-                callbackContext.error("failed");
-            }
-        }
-
-        @Override
-        public void onReady() {
-            Log.i("identify state is ready");
-        }
-
-        @Override
-        public void onStarted() {
-            Log.i("User touched fingerprint sensor");
-        }
-
-        @Override
-        public void onCompleted() {
-            Log.i("the identify is completed");
-        }
-    };
-
-    mSpassFingerprint.startIdentifyWithDialog(mContext, mIdentifyListenerDialog, false);
-
-
-	}
 }
