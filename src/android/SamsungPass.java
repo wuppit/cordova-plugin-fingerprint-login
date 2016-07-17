@@ -111,6 +111,8 @@ public class SamsungPass extends CordovaPlugin {
             public void onReady() {}
             @Override
             public void onStarted() {}
+            @Override
+            public void onCompleted() {}
         };
 
         mSpassFingerprint.setDialogTitle("Authentificate yourself!", 0xff0000);
