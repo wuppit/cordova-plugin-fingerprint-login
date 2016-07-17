@@ -128,8 +128,7 @@ public class SamsungPass extends CordovaPlugin {
 	
 	private void startIdentify(JSONArray args, CallbackContext callbackContext) {
         Log.i(TAG, "Method: startIdentify");
-        private SpassFingerprint.IdentifyListener;
-        mIdentifyListenerDialog = new SpassFingerprint.IdentifyListener() {
+        private SpassFingerprint.IdentifyListener mIdentifyListenerDialog = new SpassFingerprint.IdentifyListener() {
         @Override
         public void onFinished(int eventStatus) {
             Log.i("identify finished : reason =" + getEventStatusName(eventStatus));
