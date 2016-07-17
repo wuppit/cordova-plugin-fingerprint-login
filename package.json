@@ -3,7 +3,7 @@
   "version": "0.3.4",
   "description": "\r\n    Scan the fingerprint of your user with the TouchID sensor and other Fingerprint sensor\r\n  ",
   "cordova": {
-    "id": "cordova-plugin-fingerprint-login",
+    "id": "cordova-plugin-fingerprint-login-wuppit",
     "platforms": [
       "ios",
       "android"
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yurish/cordova-plugin-fingerprint-login.git"
+    "url": "git+https://github.com/wuppit/cordova-plugin-fingerprint-login-wuppit.git"
   },
   "keywords": [
     "TouchID",
@@ -31,7 +31,7 @@
   "author": "yurish",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yurish/cordova-plugin-fingerprint-login/issues"
+    "url": "https://github.com/wuppit/cordova-plugin-fingerprint-login-wuppit/issues"
   },
-  "homepage": "https://github.com/yurish/cordova-plugin-fingerprint-login#readme"
+  "homepage": "https://github.com/wuppit/cordova-plugin-fingerprint-login-wuppit#readme"
 }
