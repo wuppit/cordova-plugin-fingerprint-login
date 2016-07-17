@@ -21,7 +21,7 @@ import com.samsung.android.sdk.pass.SpassInvalidStateException;
 public class SamsungPass extends CordovaPlugin {
 	
 	private SpassFingerprint mSpassFingerprint;
-    private Spass mSpass;
+    	private Spass mSpass;
 	private boolean isFeatureEnabled_fingerprint = false;
 	private boolean hasRegisteredFinger = false;
 	private Context mContext;
@@ -128,7 +128,8 @@ public class SamsungPass extends CordovaPlugin {
 	
 	private void startIdentify(JSONArray args, CallbackContext callbackContext) {
         Log.i(TAG, "Method: startIdentify");
-        private SpassFingerprint.IdentifyListener mIdentifyListenerDialog = new SpassFingerprint.IdentifyListener() {
+        private SpassFingerprint.IdentifyListener;
+        mIdentifyListenerDialog = new SpassFingerprint.IdentifyListener() {
         @Override
         public void onFinished(int eventStatus) {
             Log.i("identify finished : reason =" + getEventStatusName(eventStatus));
@@ -173,7 +174,7 @@ public class SamsungPass extends CordovaPlugin {
         }
     };
 
-    mSpassFingerprint.startIdentifyWithDialog(mContext, mIdentifyListenerDialog, false)
+    mSpassFingerprint.startIdentifyWithDialog(mContext, mIdentifyListenerDialog, false);
 
 
 	}
