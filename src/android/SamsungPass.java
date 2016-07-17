@@ -1,4 +1,4 @@
-package com.susanne.fingerprint.SamsungPass
+package com.susanne.fingerprint.SamsungPass;
 
 import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaArgs;
