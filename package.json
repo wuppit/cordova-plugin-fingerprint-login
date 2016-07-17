@@ -1,5 +1,5 @@
 {
-  "name": "cordova-plugin-fingerprint-login",
+  "name": "cordova-plugin-fingerprint-login-wuppit",
   "version": "0.3.4",
   "description": "\r\n    Scan the fingerprint of your user with the TouchID sensor and other Fingerprint sensor\r\n  ",
   "cordova": {
