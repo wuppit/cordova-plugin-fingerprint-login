@@ -119,7 +119,7 @@ public class SamsungPass extends CordovaPlugin {
             for (int i = 0; i < mList.size(); i++) {
                 int index = mList.keyAt(i);
                 String name = mList.get(index);
-                fingerprints = "Index: " + index " Name: " + name + ",";
+                fingerprints = "Index: " + index + " Name: " + name + ",";
             }
             callbackContext.success(fingerprints);
         }
