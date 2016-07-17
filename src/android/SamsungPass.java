@@ -18,12 +18,12 @@ import com.samsung.android.sdk.pass.Spass;
 import com.samsung.android.sdk.pass.SpassFingerprint;
 import com.samsung.android.sdk.pass.SpassInvalidStateException;
 
-public class SamsungPassPlugin extends CordovaPlugin {
+public class SamsungPass extends CordovaPlugin {
 
     private Spass mSpass;
     private SpassFingerprint mSpassFingerprint;
     private boolean isFeatureEnabled = false;
-    private static final String TAG = "SamsungPassPlugin";
+    private static final String TAG = "SamsungPass";
 
     @Override
     public void initialize(final CordovaInterface cordova, CordovaWebView webView) {
